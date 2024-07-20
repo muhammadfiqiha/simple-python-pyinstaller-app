@@ -32,8 +32,12 @@ node {
     stage('Deploy') {
         // sh './scripts/deploy.sh'
         docker.image('python:3.9-slim').inside('-p 3000:3000') {
-            sh 'ls'
-            sh 'python3 ./sources/add2vals_web.py'
+            sh 'ls sources'
+            sh 'python3 sources/add2vals_web.py'
+            sh 'sleep 60'
+            sh 'echo $! > .pidfile'
+            sh 'set -x'
+            sh 'kill $(cat .pidfile)'
         }
     }
 }
