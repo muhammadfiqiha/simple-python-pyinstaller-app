@@ -34,7 +34,7 @@ node {
     stage('Deploy') {
         // sh './scripts/deploy.sh'
         docker.image('python:3.9-slim').inside('-p 3000:3000') {
-            sh 'python3 sources/add2vals.py'
+            sh 'python sources/add2vals.py'
             sh 'sleep 60'
             sh 'echo $! > .pidfile'
             sh 'set -x'
