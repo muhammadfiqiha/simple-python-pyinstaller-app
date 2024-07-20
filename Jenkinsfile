@@ -24,10 +24,15 @@ node {
     }
 
     stage('ManualApproval') {
-        input message: 'Lanjutkan ke tahap Deploy? (Klik "Proceed" untuk mengakhiri)'
+        input message: 'Lanjutkan ke tahap Deploy?'
     }
 
-    // stage('Deploy') {
-    //     sh './scripts/deploy.sh'
-    // }
+    stage('Deploy') {
+        // sh './scripts/deploy.sh'
+        docker.image('python:3.9-slim').inside('-p 3000:3000') {
+            sh 'pwd'
+            sh 'ls'
+            sh 'test -e dist/add2vals'
+        }
+    }
 }
