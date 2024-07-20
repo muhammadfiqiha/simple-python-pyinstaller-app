@@ -31,6 +31,7 @@ node {
         // sh './scripts/deploy.sh'
         docker.image('python:3.9-slim').inside('-p 3000:3000') {
             sh 'ls dist'
+            sh './dist/add2vals 1 2'
         }
     }
 }
