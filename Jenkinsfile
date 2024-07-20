@@ -37,7 +37,6 @@ node {
             sh 'sleep 60'
             sh 'echo $! > .pidfile'
             sh 'set -x'
-            sh 'kill $(cat .pidfile)'
         }
     }
 }
