@@ -4,7 +4,7 @@ node {
             // sh 'python -m py_compile sources/add2vals.py sources/calc.py'
             sh 'pip install flask'
             sh 'ls sources'
-            sh 'python -m py_compile sources/calc.py web.py'
+            sh 'python -m py_compile sources/calc.py sources/add2vals.py'
         }
     }
 
@@ -34,7 +34,7 @@ node {
     stage('Deploy') {
         // sh './scripts/deploy.sh'
         docker.image('python:3.9-slim').inside('-p 3000:3000') {
-            sh 'python3 web.py'
+            sh 'python3 sources/add2vals.py'
             sh 'sleep 60'
             sh 'echo $! > .pidfile'
             sh 'set -x'
