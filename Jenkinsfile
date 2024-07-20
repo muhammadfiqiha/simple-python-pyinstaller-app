@@ -20,13 +20,14 @@ node {
             sh 'pip install pyinstaller'
             sh 'pyinstaller --onefile sources/add2vals.py'
         }
+        archiveArtifacts 'dist/add2vals'
     }
 
-    // stage('ManualApproval') {
-    //     input message: 'Lanjutkan ke tahap Deploy? (Klik "Proceed" untuk mengakhiri)'
-    // }
+    stage('ManualApproval') {
+        input message: 'Lanjutkan ke tahap Deploy? (Klik "Proceed" untuk mengakhiri)'
+    }
 
     // stage('Deploy') {
-
+    //     sh './scripts/deploy.sh'
     // }
 }
