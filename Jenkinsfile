@@ -15,15 +15,14 @@ node {
 
     stage('Deliver') {
         docker.image('python:3.9-slim').inside('-u root') {
-            // sh 'apt-get update && apt-get install -y \
-            //     binutils \
-            //     && apt-get clean \
-            //     && rm -rf /var/lib/apt/lists/*'
-            // sh 'pip install pyinstaller'
-            // sh 'pyinstaller --onefile sources/add2vals.py'
-            sh 'pip install flask'
+            sh 'apt-get update && apt-get install -y \
+                binutils \
+                && apt-get clean \
+                && rm -rf /var/lib/apt/lists/*'
+            sh 'pip install pyinstaller'
+            sh 'pyinstaller --onefile sources/add2vals.py'
         }
-        // archiveArtifacts 'dist/add2vals'
+        archiveArtifacts 'dist/add2vals'
     }
 
     stage('ManualApproval') {
@@ -35,8 +34,6 @@ node {
         docker.image('python:3.9-slim').inside('-p 3000:3000') {
             sh 'python sources/add2vals.py 1 2'
             sh 'sleep 60'
-            sh 'echo $! > .pidfile'
-            sh 'set -x'
         }
     }
 }
