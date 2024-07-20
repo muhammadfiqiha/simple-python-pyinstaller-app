@@ -25,7 +25,7 @@
 #     sys.exit(1)
 
 from flask import Flask, request, jsonify
-import calc, pandas
+import calc
 
 app = Flask(__name__)
 
