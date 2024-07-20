@@ -30,9 +30,7 @@ node {
     stage('Deploy') {
         // sh './scripts/deploy.sh'
         docker.image('python:3.9-slim').inside('-p 3000:3000') {
-            sh 'pwd'
-            sh 'ls'
-            sh 'test -e dist/add2vals'
+            sh 'ls dist'
         }
     }
 }
